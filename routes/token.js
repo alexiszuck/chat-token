@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const router = express.Router();
 const Chatkit = require('@pusher/chatkit-server');
 
@@ -8,7 +9,7 @@ const chatkit = new Chatkit.default({
   key: process.env.CHATKIT_SECRET_KEY
 });
 
-router.post('/', (req, res) => {
+router.post('/', cors(), (req, res) => {
   const authData = chatkit.authenticate({
     userId: req.query.user_id
   });
